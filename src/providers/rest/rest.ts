@@ -61,9 +61,9 @@ export class RestProvider {
         });
     }
 
-    deleteClient(data) {
+    deleteClient(id) {
         return new Promise((resolve, reject) => {
-            this.http.post(this.apiUrl + '/client/delete.php', JSON.stringify(data))
+            this.http.post(this.apiUrl + '/client/delete.php', JSON.stringify({id: id}))
                 .subscribe(res => {
                     resolve(res);
                 }, (err) => {
@@ -128,9 +128,9 @@ export class RestProvider {
         });
     }
 
-    deleteVille(data) {
+    deleteVille(id) {
         return new Promise((resolve, reject) => {
-            this.http.post(this.apiUrl + '/ville/delete.php', JSON.stringify(data))
+            this.http.post(this.apiUrl + '/ville/delete.php', JSON.stringify({id: id}))
                 .subscribe(res => {
                     resolve(res);
                 }, (err) => {
@@ -195,9 +195,9 @@ export class RestProvider {
         });
     }
 
-    deleteActivite(data) {
+    deleteActivite(id) {
         return new Promise((resolve, reject) => {
-            this.http.post(this.apiUrl + '/activite/delete.php', JSON.stringify(data))
+            this.http.post(this.apiUrl + '/activite/delete.php', JSON.stringify({id: id}))
                 .subscribe(res => {
                     resolve(res);
                 }, (err) => {

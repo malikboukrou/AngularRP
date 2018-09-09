@@ -10,11 +10,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SearchComponent } from './search/search.component';
 import { RestProvider } from '../providers/rest/rest';
 
-import { NavbarModule } from './shared/navbar/navbar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { SidebarModule } from './sidebar/sidebar.module';
-import { LbdModule } from './lbd/lbd.module';
 import { RouterModule } from '@angular/router';
+import { ClientComponent } from './client/client.component';
 
 @NgModule({
     imports: [
@@ -22,16 +21,15 @@ import { RouterModule } from '@angular/router';
         FormsModule,
         AppRoutingModule,
         HttpClientModule,
-        NavbarModule,
         FooterModule,
         SidebarModule,
-        LbdModule,
         RouterModule
     ],
     declarations: [
         AppComponent,
         DashboardComponent,
-        SearchComponent
+        SearchComponent,
+        ClientComponent
     ],
     bootstrap: [AppComponent],
     providers: [RestProvider]

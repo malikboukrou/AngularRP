@@ -1,39 +1,38 @@
 import { Component, OnInit } from '@angular/core';
+import {RestProvider} from '../../providers/rest/rest';
 
-declare const $: any;
-declare interface RouteInfo {
-    path: string;
-    title: string;
-    icon: string;
-    class: string;
-}
-export const ROUTES: RouteInfo[] = [
-    { path: 'dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
-    { path: 'user', title: 'User Profile',  icon: 'pe-7s-user', class: '' },
-    { path: 'table', title: 'Table List',  icon: 'pe-7s-note2', class: '' },
-    { path: 'typography', title: 'Typography',  icon: 'pe-7s-news-paper', class: '' },
-    { path: 'icons', title: 'Icons',  icon: 'pe-7s-science', class: '' },
-    { path: 'maps', title: 'Maps',  icon: 'pe-7s-map-marker', class: '' },
-    { path: 'notifications', title: 'Notifications',  icon: 'pe-7s-bell', class: '' },
-];
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html'
+    selector: 'app-sidebar',
+    templateUrl: './sidebar.component.html',
+    styleUrls: [ './sidebar.component.css' ]
 })
 export class SidebarComponent implements OnInit {
-  menuItems: any[];
+    clients: any = [];
 
-  constructor() { }
+    constructor(public restProvider: RestProvider) {
+        this.clients = [{}];
+    }
 
-  ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
-  }
+    ngOnInit() {
+        this.getClients();
+    }
 
-  isMobileMenu() {
-      if (window.innerWidth > 991) {
-          return false;
-      }
-      return true;
-  }
+    isMobileMenu() {
+        if (window.innerWidth > 991) {
+            return false;
+        }
+        return true;
+    }
+
+    getClients() {
+        this.restProvider.getAllClient()
+            .then(data => {
+                this.clients = data;
+                console.log(data);
+            })
+            .catch(e => {
+                console.log('getClients error ', e);
+            });
+    }
 }

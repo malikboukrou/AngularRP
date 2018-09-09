@@ -1,186 +1,120 @@
 <div class="main-content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-4">
-        <app-lbd-chart>
-                [title]="'Email Statistics'"
-                [subtitle]="'Last Campaign Performance'"
-                [chartClass]="'ct-perfect-fourth'"
-                [chartType]="emailChartType"
-                [chartData]="emailChartData"
-                [legendItems]="emailChartLegendItems"
-                [withHr]="true"
-                [footerIconClass]="'fa fa-clock-o'"
-                [footerText]="'Campaign sent 2 days ago'">
-        </app-lbd-chart>
-      </div>
-      <div class="col-md-8">
-        <app-lbd-chart>
-                [title]="'Users Behavior'"
-                [subtitle]="'24 Hours performance'"
-                [chartType]="hoursChartType"
-                [chartData]="hoursChartData"
-                [chartOptions]="hoursChartOptions"
-                [chartResponsive]="hoursChartResponsive"
-                [legendItems]="hoursChartLegendItems"
-                [withHr]="true"
-                [footerIconClass]="'fa fa-history'"
-                [footerText]="'Updated 3 minutes ago'">
-        </app-lbd-chart>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <app-lbd-chart>
-                [title]="'2014 Sales'"
-                [subtitle]="'All products including Taxes'"
-                [chartType]="activityChartType"
-                [chartData]="activityChartData"
-                [chartOptions]="activityChartOptions"
-                [chartResponsive]="activityChartResponsive"
-                [legendItems]="activityChartLegendItems"
-                [withHr]="true"
-                [footerIconClass]="'fa fa-check'"
-                [footerText]="'Data information certified'">
-        </app-lbd-chart>
-      </div>
-      <div class="col-md-6">
-        <div class="card">
-          <div class="header">
-            <h4 class="title">Tasks</h4>
-            <p class="category">Backend development</p>
-          </div>
-          <div class="content">
-            <div class="table-full-width">
-              <table class="table">
-                <tbody>
-                <tr>
-                  <td>
-                    <div class="checkbox">
-                      <input id="checkbox1" type="checkbox">
-                      <label for="checkbox1">
-
-                      </label>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Clients</h4>
                     </div>
-                  </td>
-                  <td>Sign contract for "What are conference organizers afraid of?"</td>
-                  <td class="td-actions text-right">
-                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                      <i class="fa fa-edit"></i>
-                    </button>
-                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                      <i class="fa fa-times"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="checkbox">
-                      <input id="checkbox2" type="checkbox" checked>
-                      <label for="checkbox2">
-
-                      </label>
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Enseigne</th>
+                                <th>Url</th>
+                                <th>Type site</th>
+                                <th>Domaine</th>
+                                <th>Nom gérant</th>
+                                <th>Prénom gérant</th>
+                                <th>Email</th>
+                                <th>Adresse</th>
+                                <th>Ville</th>
+                                <th>CP</th>
+                                <th>Tel</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let client of clients">
+                                <td>{{client.id}}</td>
+                                <td>{{client.enseigne}}</td>
+                                <td>{{client.url_becom}}</td>
+                                <td>{{client.type_site}}</td>
+                                <td>{{client.activite}}</td>
+                                <td>{{client.nom_gerant}}</td>
+                                <td>{{client.prenom_gerant}}</td>
+                                <td>{{client.email}}</td>
+                                <td>{{client.adresse}}</td>
+                                <td>{{client.ville}}</td>
+                                <td>{{client.cp}}</td>
+                                <td>{{client.tel}}</td>
+                                <td class="td-actions">
+                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs" (click)="deleteClient(client.id)">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                  </td>
-                  <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                  <td class="td-actions text-right">
-                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                      <i class="fa fa-edit"></i>
-                    </button>
-                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                      <i class="fa fa-times"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="checkbox">
-                      <input id="checkbox3" type="checkbox" checked>
-                      <label for="checkbox3">
-
-                      </label>
+                </div>
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Activités</h4>
                     </div>
-                  </td>
-                  <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                  </td>
-                  <td class="td-actions text-right">
-                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                      <i class="fa fa-edit"></i>
-                    </button>
-                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                      <i class="fa fa-times"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="checkbox">
-                      <input id="checkbox4" type="checkbox">
-                      <label for="checkbox4">
-
-                      </label>
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Activité</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let act of activites">
+                                <td>{{act.id}}</td>
+                                <td>{{act.activite}}</td>
+                                <td class="td-actions">
+                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs" (click)="deleteActivite(act.id)">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                  </td>
-                  <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                  <td class="td-actions text-right">
-                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                      <i class="fa fa-edit"></i>
-                    </button>
-                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                      <i class="fa fa-times"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="checkbox">
-                      <input id="checkbox5" type="checkbox" >
-                      <label for="checkbox5">
-
-                      </label>
+                </div>
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Villes</h4>
                     </div>
-                  </td>
-                  <td>Read "Following makes Medium better"</td>
-                  <td class="td-actions text-right">
-                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                      <i class="fa fa-edit"></i>
-                    </button>
-                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                      <i class="fa fa-times"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="checkbox">
-                      <input id="checkbox6" type="checkbox">
-                      <label for="checkbox6">
-
-                      </label>
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nom</th>
+                                <th>CP</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let ville of villes">
+                                <td>{{ville.id}}</td>
+                                <td>{{ville.nom_ville}}</td>
+                                <td>{{ville.cp}}</td>
+                                <td class="td-actions">
+                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs" (click)="deleteVille(ville.id)">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                  </td>
-                  <td>Unfollow 5 enemies from twitter</td>
-                  <td class="td-actions text-right">
-                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                      <i class="fa fa-edit"></i>
-                    </button>
-                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                      <i class="fa fa-times"></i>
-                    </button>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+                </div>
             </div>
-            <div class="footer">
-              <hr>
-              <div class="stats">
-                <i class="fa fa-history"></i> Updated 3 minutes ago
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
