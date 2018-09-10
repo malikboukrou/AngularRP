@@ -11,8 +11,14 @@ import {RestProvider} from '../../providers/rest/rest';
 export class ClientComponent implements OnInit, OnDestroy {
     @Input() client: any;
     navigationSubscription;
-    activites: any = [];
-    villes: any = [];
+    clientactivites: any = [];
+    clientvilles: any = [];
+    allVilles: any = [];
+    allActivites: any = [];
+    id_client = +this.route.snapshot.paramMap.get('id');
+
+    villeAAjouter: string;
+    activiteAAjouter: string;
 
     constructor(private route: ActivatedRoute, private restProvider: RestProvider, private location: Location,
                 private router: Router) {
@@ -22,79 +28,151 @@ export class ClientComponent implements OnInit, OnDestroy {
                 this.getClient();
             }
         });
-        this.villes = [{}];
-        this.activites = [{}];
     }
 
     ngOnInit() {
         this.getClient();
-        this.getVilles();
-        this.getActivites();
+        this.getAllActivites();
+        this.getAllVilles();
+        this.getClientVilles(this.id_client);
+        this.getClientActivites(this.id_client);
     }
 
     getClient() {
-        const id = +this.route.snapshot.paramMap.get('id');
-        this.restProvider.getClient(id)
+        this.restProvider.getClient(this.id_client)
             .then(data => {
                 this.client = data;
-                console.log(data);
             })
             .catch(e => {
                 console.log('getClients error ', e);
             });
     }
 
-    getVilles() {
+    getAllVilles() {
         this.restProvider.getAllVille()
             .then(data => {
-                this.villes = data;
-                console.log(data);
+                this.allVilles = data;
+            })
+            .catch(e => {
+                console.log('getAllVilles error ', e);
+            });
+    }
+
+    getAllActivites() {
+        this.restProvider.getAllActivite()
+            .then(data => {
+                this.allActivites = data;
+            })
+            .catch(e => {
+                console.log('getAllActivites error ', e);
+            });
+    }
+
+    getClientVilles(id) {
+        this.restProvider.getClientVille(id)
+            .then(data => {
+                this.clientvilles = data;
             })
             .catch(e => {
                 console.log('getVilles error ', e);
             });
     }
 
-    getActivites() {
-        this.restProvider.getAllActivite()
+    getClientActivites(id) {
+        this.restProvider.getClientActivite(id)
             .then(data => {
-                this.activites = data;
-                console.log(data);
+                this.clientactivites = data;
             })
             .catch(e => {
                 console.log('getActivites error ', e);
             });
     }
 
-    deleteVille(id) {
-        this.restProvider.deleteVille(id)
+    deleteClientVille(id_ville) {
+        this.restProvider.deleteClientVille(this.id_client, id_ville)
             .then(data => {
                 console.log(data);
+                location.reload();
             })
             .catch(e => {
                 console.log('deleteVille error ', e);
             });
     }
 
-    deleteActivite(id) {
-        this.restProvider.deleteActivite(id)
+    deleteClientActivite(id_act) {
+        this.restProvider.deleteClientActivite(this.id_client, id_act)
             .then(data => {
                 console.log(data);
+                location.reload();
             })
             .catch(e => {
                 console.log('deleteActivite error ', e);
             });
     }
 
-    goBack() {
-        this.location.back();
+    addClientVille() {
+        this.restProvider.searchVille(this.villeAAjouter)
+            .then(data => {
+                // la ville existe deja
+                try {
+                    const v_id = data[0].id;
+                    this.restProvider.createClientVille({id_client: this.id_client, id_ville: v_id})
+                        .then(datas => {
+                            location.reload();
+                        })
+                        .catch(e => {
+                            console.log(e);
+                        });
+                // la ville n'existe pas encore en base
+                } catch (error) {
+                    this.restProvider.createVille({nom_ville: this.villeAAjouter, cp: 0})
+                        .then(datass => {
+                            this.addClientVille();
+                        })
+                        .catch(e => {
+                            console.log(e);
+                        });
+                }
+            })
+            .catch(e => {
+                console.log('add ville to client error', e);
+            });
+    }
+
+    addClientActivite() {
+        this.restProvider.searchActivite(this.activiteAAjouter)
+            .then(data => {
+                // l'activite existe deja
+                try {
+                    const a_id = data[0].id;
+                    this.restProvider.createClientActivite({id_client: this.id_client, id_activite: a_id})
+                        .then(datas => {
+                            location.reload();
+                        })
+                        .catch(e => {
+                            console.log(e);
+                        });
+                    // l'activite n'existe pas encore en base
+                } catch (error) {
+                    this.restProvider.createActivite({activite: this.activiteAAjouter})
+                        .then(datass => {
+                            this.addClientActivite();
+                        })
+                        .catch(e => {
+                            console.log(e);
+                        });
+                }
+            })
+            .catch(e => {
+                console.log('add ville to client error', e);
+            });
     }
 
     save() {
         this.restProvider.updateClient(this.client)
             .then(data => {
                 console.log(data);
-                this.goBack();
+                location.reload();
             })
             .catch(e => {
                 console.log('getClients error ', e);

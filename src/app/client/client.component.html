@@ -94,9 +94,9 @@
                     <div class="header">
                         <h4 class="title">Villes</h4>
                         <div class="input-group mb-3 margin-top-10" >
-                            <input type="text" class="form-control" placeholder="Ville">
+                            <input type="text" class="form-control" placeholder="Ville" [(ngModel)]="villeAAjouter">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">Ajouter</button>
+                                <button class="btn btn-outline-secondary" type="button" (click)="addClientVille()">Ajouter</button>
                             </div>
                         </div>
                     </div>
@@ -111,11 +111,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr *ngFor="let ville of villes">
-                                <td>{{ville.nom_ville}}</td>
-                                <td>{{ville.cp}}</td>
+                            <tr *ngFor="let ville of clientvilles">
+                                <td>{{ ville.nom_ville }}</td>
+                                <td>{{ ville.cp }}</td>
                                 <td class="td-actions">
-                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs" (click)="deleteVille(ville.id)">
+                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs" (click)="deleteClientVille(ville.id_ville)">
                                         <i class="fa fa-times"></i>
                                     </button>
                                 </td>
@@ -128,9 +128,9 @@
                     <div class="header">
                         <h4 class="title">Activités</h4>
                         <div class="input-group mb-3 margin-top-10">
-                            <input type="text" class="form-control" placeholder="Activité">
+                            <input type="text" class="form-control" placeholder="Activité" [(ngModel)]="activiteAAjouter">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">Ajouter</button>
+                                <button class="btn btn-outline-secondary" type="button" (click)="addClientActivite()">Ajouter</button>
                             </div>
                         </div>
                     </div>
@@ -143,11 +143,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr *ngFor="let act of activites">
+                            <tr *ngFor="let act of clientactivites">
 
                                 <td>{{act.activite}}</td>
                                 <td class="td-actions">
-                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs" (click)="deleteActivite(act.id)">
+                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs" (click)="deleteClientActivite(act.id_activite)">
                                         <i class="fa fa-times"></i>
                                     </button>
                                 </td>

@@ -17,7 +17,7 @@ export class RestProvider {
     }
 
 
-    /* ---------------------CLIENT---------------------- */
+    /* --------------------- CLIENT ---------------------- */
 
     getAllClient() {
         return new Promise(resolve => {
@@ -84,7 +84,7 @@ export class RestProvider {
     }
 
 
-    /* ---------------------VILLE---------------------- */
+    /* --------------------- VILLE ---------------------- */
 
     getAllVille() {
         return new Promise(resolve => {
@@ -151,7 +151,7 @@ export class RestProvider {
     }
 
 
-    /* ---------------------ACTIVITE---------------------- */
+    /* --------------------- ACTIVITE ---------------------- */
 
     getAllActivite() {
         return new Promise(resolve => {
@@ -209,6 +209,76 @@ export class RestProvider {
     searchActivite(s) {
         return new Promise((resolve, reject) => {
             this.http.get(this.apiUrl + '/activite/search.php?s=' + s)
+                .subscribe(res => {
+                    resolve(res);
+                }, (err) => {
+                    reject(err);
+                });
+        });
+    }
+
+    /* --------------------- ClientVille ---------------------- */
+
+    getClientVille(id) {
+        return new Promise(resolve => {
+            this.http.get(this.apiUrl + '/clientville/read.php?id_client=' + id).subscribe(data => {
+                resolve(data);
+            }, err => {
+                console.log(err);
+            });
+        });
+    }
+
+    createClientVille(data) {
+        return new Promise((resolve, reject) => {
+            this.http.post(this.apiUrl + '/clientville/create.php', JSON.stringify(data))
+                .subscribe(res => {
+                    resolve(res);
+                }, (err) => {
+                    reject(err);
+                });
+        });
+    }
+
+    deleteClientVille(id_client, id_ville) {
+        console.log(id_ville + '::' + id_client);
+        return new Promise((resolve, reject) => {
+            this.http.post(this.apiUrl + '/clientville/delete.php', JSON.stringify({id_client: id_client, id_ville: id_ville}))
+                .subscribe(res => {
+                    resolve(res);
+                }, (err) => {
+                    reject(err);
+                });
+        });
+    }
+
+
+    /* --------------------- ClientActivité ---------------------- */
+
+    getClientActivite(id) {
+        return new Promise(resolve => {
+            this.http.get(this.apiUrl + '/clientactivite/read.php?id_client=' + id).subscribe(data => {
+                resolve(data);
+            }, err => {
+                console.log(err);
+            });
+        });
+    }
+
+    createClientActivite(data) {
+        return new Promise((resolve, reject) => {
+            this.http.post(this.apiUrl + '/clientactivite/create.php', JSON.stringify(data))
+                .subscribe(res => {
+                    resolve(res);
+                }, (err) => {
+                    reject(err);
+                });
+        });
+    }
+
+    deleteClientActivite(id_client, id_act) {
+        return new Promise((resolve, reject) => {
+            this.http.post(this.apiUrl + '/clientactivite/delete.php', JSON.stringify({id_client: id_client, id_activite: id_act}))
                 .subscribe(res => {
                     resolve(res);
                 }, (err) => {

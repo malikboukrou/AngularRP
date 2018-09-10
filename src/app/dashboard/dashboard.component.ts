@@ -31,7 +31,6 @@ export class DashboardComponent implements OnInit {
         this.restProvider.getAllVille()
             .then(data => {
                 this.villes = data;
-                console.log(data);
             })
             .catch(e => {
                 console.log('getVilles error ', e);
@@ -42,7 +41,6 @@ export class DashboardComponent implements OnInit {
         this.restProvider.getAllActivite()
             .then(data => {
                 this.activites = data;
-                console.log(data);
             })
             .catch(e => {
                 console.log('getActivites error ', e);
@@ -53,7 +51,6 @@ export class DashboardComponent implements OnInit {
         this.restProvider.getAllClient()
             .then(data => {
                 this.clients = data;
-                console.log(data);
             })
             .catch(e => {
                 console.log('getClients error ', e);

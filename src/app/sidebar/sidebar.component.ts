@@ -29,7 +29,6 @@ export class SidebarComponent implements OnInit {
         this.restProvider.getAllClient()
             .then(data => {
                 this.clients = data;
-                console.log(data);
             })
             .catch(e => {
                 console.log('getClients error ', e);
