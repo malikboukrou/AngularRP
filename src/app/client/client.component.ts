@@ -3,6 +3,7 @@ import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import { Location } from '@angular/common';
 import {RestProvider} from '../../providers/rest/rest';
 
+
 @Component({
     selector: 'app-client',
     templateUrl: './client.component.html',
@@ -168,11 +169,22 @@ export class ClientComponent implements OnInit, OnDestroy {
             });
     }
 
+    deleteClient() {
+        this.restProvider.deleteClient(this.id_client)
+            .then(data => {
+                console.log(data);
+                this.router.navigate(['/']);
+            })
+            .catch(e => {
+                console.log('delete client error', e);
+            });
+    }
+
     save() {
+        console.log('client:', this.client);
         this.restProvider.updateClient(this.client)
             .then(data => {
                 console.log(data);
-                location.reload();
             })
             .catch(e => {
                 console.log('getClients error ', e);

@@ -2,3 +2,8 @@
     border: 0px !important;
     border-color: transparent;
 }
+
+i::after {
+    font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+    font-size: 15px;
+}

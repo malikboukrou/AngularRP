@@ -16,8 +16,9 @@
             </a>
         </li>
         <li class="separator hidden-lg hidden-md" *ngIf="isMobileMenu()"></li>
+        <button type="button" class="btn btn-info btn-fill btn-block" (click)="genererJson()"><i class="fa fa-clone">&nbsp;&nbsp;Générer JSON</i></button>
         <input type="text" class="form-control" placeholder="Rechercher" value="">
-        <button class="btn no-border"><i class="fa fa-plus"></i></button>
+        <button class="btn no-border" (click)="goToAddClient()"><i class="fa fa-plus"></i></button>
         <li routerLinkActive="active" *ngFor="let client of clients">
             <a  [routerLink]="['client', client.id]">
                 <span class="notification hidden-sm hidden-xs">{{client.id}}</span>

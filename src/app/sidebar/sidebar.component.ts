@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {RestProvider} from '../../providers/rest/rest';
+import {Location} from '@angular/common';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -10,7 +12,9 @@ import {RestProvider} from '../../providers/rest/rest';
 export class SidebarComponent implements OnInit {
     clients: any = [];
 
-    constructor(public restProvider: RestProvider) {
+
+    constructor(private route: ActivatedRoute, private restProvider: RestProvider, private location: Location,
+                private router: Router) {
         this.clients = [{}];
     }
 
@@ -32,6 +36,20 @@ export class SidebarComponent implements OnInit {
             })
             .catch(e => {
                 console.log('getClients error ', e);
+            });
+    }
+
+    goToAddClient() {
+        this.router.navigate(['/client']);
+    }
+
+    genererJson() {
+        this.restProvider.genererJSON()
+            .then(data => {
+                console.log(data);
+            })
+            .catch(e => {
+                console.log('generer jSON error ', e);
             });
     }
 }

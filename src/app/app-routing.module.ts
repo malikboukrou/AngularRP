@@ -9,7 +9,8 @@ import {ClientComponent} from './client/client.component';
 const routes: Routes = [
     {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
     {path: 'dashboard', component: DashboardComponent},
-    {path: 'client/:id', component: ClientComponent, runGuardsAndResolvers: 'always'}
+    {path: 'client/:id', component: ClientComponent, runGuardsAndResolvers: 'always'},
+    {path: 'client', component: ClientComponent, runGuardsAndResolvers: 'always'}
 ];
 
 @NgModule({

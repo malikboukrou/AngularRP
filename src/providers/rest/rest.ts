@@ -286,4 +286,14 @@ export class RestProvider {
                 });
         });
     }
+
+    genererJSON() {
+        return new Promise(resolve => {
+            this.http.get(this.apiUrl + '/client/generer.php').subscribe(data => {
+                resolve(data);
+            }, err => {
+                console.log(err);
+            });
+        });
+    }
 }
